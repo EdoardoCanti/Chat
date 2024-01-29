@@ -30,6 +30,11 @@ public:
     string getUsername();
     void setUsername(string username);
     string getContactList();
+
+    // Contact handling methods
+    bool findContact(User* usr);
+    bool addContact(User* usr);
+    bool removeContact(User* usr);
 };
 
 

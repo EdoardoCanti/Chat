@@ -19,3 +19,32 @@ string User::getContactList() {
         contactsString += (*it) -> getUsername() + "\n";
     }
 }
+
+bool User::findContact(User *usr) {
+    bool found = false;
+    list<User *>::iterator it;
+    for (it = contacts.begin(); it != contacts.end(); it++) {
+        if ((*it)->getUsername() == usr->getUsername())
+            found = true;
+    }
+    return found;
+}
+
+bool User::addContact(User *usr) {
+    bool added = false;
+    if(!(this->findContact(usr))){
+        contacts.push_back(usr);
+        added = true;
+    }
+    return added;
+}
+
+bool User::removeContact(User *usr){
+    bool removed = false;
+    if (this->findContact(usr)){
+        contacts.remove(usr);
+        removed = true;
+    }
+    return removed;
+}
+
