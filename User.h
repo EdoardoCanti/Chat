@@ -7,6 +7,7 @@
 
 #include <string>
 #include <list>
+#include "Chat.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ class User {
 private:
     string username;
     list<User*> contacts;
+    // List of pairs of type <User, Chat> in order to easily retrieve the chat with a specific user.
+    list<pair<User*, Chat*>> user_register;
 
 public:
     // C'tors
@@ -35,6 +38,13 @@ public:
     bool findContact(User* usr);
     bool addContact(User* usr);
     bool removeContact(User* usr);
+
+
+    bool findChat(User* usr);
+    Chat* returnChat(User* usr);
+    void acceptChat(User* usr, Chat* c);
+    Chat* startChat(User* usr);
+    void sendMessage(Chat* c, string content);
 };
 
 

@@ -48,3 +48,51 @@ bool User::removeContact(User *usr){
     return removed;
 }
 
+bool User::findChat(User *usr) {
+    bool found = false;
+    for(auto it : user_register){
+        if(it.first == usr)
+            found = true;
+    }
+    return found;
+}
+
+Chat* User::returnChat(User *usr) {
+    for(auto it : user_register){
+        if(it.first == usr)
+            return it.second;
+    }
+    return nullptr;
+}
+
+void User::acceptChat(User* usr, Chat* c){
+    pair<User*, Chat*> pair(usr, c);
+    user_register.push_front(pair);
+}
+
+Chat* User::startChat(User *usr) {
+    Chat* c = nullptr;
+    if(findContact(usr)){
+        if(!findChat(usr)){
+            c = new Chat();
+            pair<User*, Chat*> pair(usr, c);
+            user_register.push_front(pair);
+            //the other user needs to accept the chat, in order to have a reference to the same object
+            usr->acceptChat(this, c);
+        }else{
+            c = returnChat(usr);
+        }
+        return c;
+    }else{
+        this->addContact(usr);
+        return c;
+    }
+}
+
+void User::sendMessage(Chat *c, std::string content) {
+    string complete_content = "";
+    string meta_data = this->getUsername();
+    complete_content = meta_data+": "+content;
+    Message* msg = new Message(complete_content);
+    c->addMessage(msg);
+}
