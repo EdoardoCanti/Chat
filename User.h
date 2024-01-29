@@ -9,6 +9,12 @@
 #include <list>
 
 using namespace std;
+
+/*
+ * Every User will have its register.
+ * Every entry of the register will be a tuple of User,Chat.
+ * A chat with a specifi user will be allowed iff the user is in the contacts of this user.
+ */
 class User {
 
 private:
