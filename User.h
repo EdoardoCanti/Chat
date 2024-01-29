@@ -8,6 +8,7 @@
 #include <string>
 #include <list>
 #include "Chat.h"
+#include "SystemRegister.h"
 
 using namespace std;
 
@@ -23,10 +24,11 @@ private:
     list<User*> contacts;
     // List of pairs of type <User, Chat> in order to easily retrieve the chat with a specific user.
     list<pair<User*, Chat*>> user_register;
+    SystemRegister* sr; //reference to global SystemRegister
 
 public:
     // C'tors
-    User(string username);
+    User(string username, SystemRegister* sr);
     User();
 
     // Getters and Setters

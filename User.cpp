@@ -6,7 +6,7 @@
 
 using namespace std;
 
-User::User(string username) : username(username){ }
+User::User(string username, SystemRegister* sr) : username(username), sr(sr){ }
 User::User() { }
 
 string User::getUsername() { return username; }
@@ -79,6 +79,7 @@ Chat* User::startChat(User *usr) {
             user_register.push_front(pair);
             //the other user needs to accept the chat, in order to have a reference to the same object
             usr->acceptChat(this, c);
+            this->sr->addChat(c);
         }else{
             c = returnChat(usr);
         }
