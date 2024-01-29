@@ -3,4 +3,5 @@ project(Lab_Programmazione)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Lab_Programmazione main.cpp)
+add_executable(Lab_Programmazione main.cpp
+        User.h)
