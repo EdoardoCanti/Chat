@@ -12,4 +12,6 @@ add_executable(Lab_Programmazione main.cpp
         Chat.cpp
         SystemRegister.h
         SystemRegister.cpp
-        User.cpp)
+        User.cpp
+        GroupChat.h
+        GroupChat.cpp)
