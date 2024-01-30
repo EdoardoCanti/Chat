@@ -47,6 +47,8 @@ public:
     void acceptChat(User* usr, Chat* c);
     Chat* startChat(User* usr);
     void sendMessage(Chat* c, string content);
+
+    void getRegister();
 };
 
 

@@ -18,6 +18,7 @@ string User::getContactList() {
     for(it = contacts.begin(); it != contacts.end(); it++){
         contactsString += (*it) -> getUsername() + "\n";
     }
+    return contactsString;
 }
 
 bool User::findContact(User *usr) {
@@ -68,6 +69,7 @@ Chat* User::returnChat(User *usr) {
 void User::acceptChat(User* usr, Chat* c){
     pair<User*, Chat*> pair(usr, c);
     user_register.push_front(pair);
+    this->addContact(usr);
 }
 
 Chat* User::startChat(User *usr) {
@@ -96,4 +98,13 @@ void User::sendMessage(Chat *c, std::string content) {
     complete_content = meta_data+": "+content;
     Message* msg = new Message(complete_content);
     c->addMessage(msg);
+}
+
+void User::getRegister() {
+    std::cout<<"register of: "<<this->getUsername()<<std::endl;
+    for(auto it : user_register){
+        std::cout<<"user: "<<it.first->getUsername()<<std::endl;
+        std::cout<<"chat: "<<it.second->showMessages()<<std::endl;
+        std::cout<<"----"<<std::endl;
+    }
 }
