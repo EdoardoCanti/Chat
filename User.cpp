@@ -92,6 +92,17 @@ Chat* User::startChat(User *usr) {
     }
 }
 
+GroupChat* User::createGroup(list<User*> members){
+    GroupChat* c = nullptr;
+    for(auto it : members){
+        if(findContact(it)){
+            c = new GroupChat(members);
+            c->addMember(this);
+        }
+    }
+    return c;
+}
+
 void User::sendMessage(Chat *c, std::string content) {
     string complete_content = "";
     string meta_data = this->getUsername();

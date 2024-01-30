@@ -9,6 +9,9 @@
 #include <list>
 #include "Chat.h"
 #include "SystemRegister.h"
+#include "GroupChat.h"
+
+//class GroupChat;
 
 using namespace std;
 
@@ -49,6 +52,8 @@ public:
     void sendMessage(Chat* c, string content);
 
     void getRegister();
+
+    GroupChat* createGroup(list<User*> members);
 };
 
 
