@@ -4,7 +4,9 @@
 
 #include "SystemRegister.h"
 
-SystemRegister::SystemRegister() {}
+SystemRegister::SystemRegister()= default;
+
+SystemRegister* SystemRegister::instance = nullptr;
 
 SystemRegister* SystemRegister::getInstance() {
     if(instance == nullptr)
@@ -16,7 +18,8 @@ void SystemRegister::addChat(Chat *c) {
     this->chats_register.push_back(c);
 }
 
-void SystemRegister::showChats() {{
-    for(auto it : chats_register)
-        cout<<it->getId()<<endl;
-}}
+void SystemRegister::showChats(){
+    for(auto it : chats_register){
+        std::cout<<it->getId();
+    }
+}
