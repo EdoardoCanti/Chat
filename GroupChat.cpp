@@ -14,7 +14,7 @@ void GroupChat::addMember(User *usr) {
     this->members.insert(usr);
 }
 
-const set<User *> &GroupChat::getMembers() const {
+set<User *> GroupChat::getMembers(){
     return members;
 }
 

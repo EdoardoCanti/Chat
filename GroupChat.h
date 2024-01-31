@@ -20,7 +20,7 @@ private:
 public:
     GroupChat(list<User*> members);
     void addMember(User* usr);
-    const set<User *> &getMembers() const;
+    set<User *> getMembers();
 };
 
 
