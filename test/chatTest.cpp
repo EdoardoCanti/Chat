@@ -18,4 +18,4 @@ TEST(Chat, multipleChatsStaticIdentifier) {
     ASSERT_EQ(c_0->getId(), 1);
     ASSERT_EQ(c_1->getId(), 2);
     ASSERT_EQ(c_2->getId(), 3);
-}s
+}
