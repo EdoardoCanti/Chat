@@ -98,6 +98,7 @@ Chat* User::startChat(User *usr) {
 
 GroupChat* User::createGroup(){
     GroupChat* c = new GroupChat();
+    c->addMember(this);
 }
 
 GroupChat* User::createGroup(list<User*> members){
