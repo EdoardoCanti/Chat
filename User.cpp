@@ -96,8 +96,12 @@ Chat* User::startChat(User *usr) {
     }
 }
 
+GroupChat* User::createGroup(){
+    GroupChat* c = new GroupChat();
+}
+
 GroupChat* User::createGroup(list<User*> members){
-    GroupChat* c = nullptr;
+    GroupChat* c = new GroupChat();
     for(auto it : members){
         if(findContact(it)){
             c = new GroupChat(members);

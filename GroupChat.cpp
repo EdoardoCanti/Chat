@@ -4,6 +4,8 @@
 
 #include "GroupChat.h"
 
+GroupChat::GroupChat() = default;
+
 GroupChat::GroupChat(list<User*> members){
     for(auto it:members){
         this->members.insert(it);

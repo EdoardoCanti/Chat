@@ -54,6 +54,7 @@ public:
 
     void getRegister();
 
+    GroupChat* createGroup();
     GroupChat* createGroup(list<User*> members);
 };
 

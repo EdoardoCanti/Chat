@@ -18,6 +18,7 @@ private:
     set<User*> members;
 
 public:
+    GroupChat();
     GroupChat(list<User*> members);
     void addMember(User* usr);
     set<User *> getMembers();
