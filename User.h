@@ -37,6 +37,7 @@ public:
     // Getters and Setters
     string getUsername();
     void setUsername(string username);
+    list<User*> getContacts();
     string getContactList();
 
     // Contact handling methods

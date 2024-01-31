@@ -12,6 +12,10 @@ User::User() { }
 string User::getUsername() { return username; }
 void User::setUsername(string username) { this->username = username; }
 
+list<User*> User::getContacts(){
+    return contacts;
+}
+
 string User::getContactList() {
     string contactsString = "";
     list<User *>::iterator it;
