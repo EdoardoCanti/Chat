@@ -18,3 +18,16 @@ TEST(Message, setContent){
     msg->setContent(stringToSet);
     ASSERT_EQ(stringToSet, msg->getContent());
 }
+
+TEST(Message, unseenMessage){
+    string content = "Hello World";
+    Message* msg = new Message(content);
+    ASSERT_FALSE(msg->isSeen());
+}
+
+TEST(Message, seenMessage){
+    string content = "Hello World";
+    Message* msg = new Message(content);
+    msg->setSeen(true);
+    ASSERT_TRUE(msg->isSeen());
+}
