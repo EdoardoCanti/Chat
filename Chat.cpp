@@ -4,8 +4,13 @@
 
 #include "Chat.h"
 
-int Chat::id = 0; // static int set to 0
-Chat::Chat() { this->id += 1;} // every new Chat has an incremented identfier
+int Chat::global_id = 0; // static int set to 0
+
+Chat::Chat() {
+    global_id++;
+    this->id = global_id;
+
+} // every new Chat has an incremented identfier
 
 void Chat::addMessage(Message *msg) {
     messages.push_back(msg);
@@ -19,4 +24,6 @@ string Chat::showMessages() {
     return conversation;
 }
 
-int Chat::getId() { return id; }
+int Chat::getId(){
+    return id;
+}

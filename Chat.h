@@ -15,14 +15,15 @@
 class Chat {
 
 private:
-    static int id;
+    static int global_id;
+    int id;
     list<Message*> messages;
 
 public:
     Chat();
     void addMessage(Message* msg);
     string showMessages();
-    static int getId();
+    int getId();
 
 };
 
