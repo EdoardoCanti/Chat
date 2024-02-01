@@ -3,6 +3,7 @@
 //
 
 #include "User.h"
+#include <iostream>
 
 using namespace std;
 
@@ -12,6 +13,13 @@ User::User() { }
 string User::getUsername() { return username; }
 void User::setUsername(string username) { this->username = username; }
 
+void User::addChat(Chat *c) {
+    chats.push_back(c);
+}
+
+list<Chat*> User::getChats(){
+    return chats;
+}
 list<User*> User::getContacts(){
     return contacts;
 }
@@ -25,106 +33,36 @@ string User::getContactList() {
     return contactsString;
 }
 
-bool User::findContact(User *usr) {
+bool User::findChat(Chat* c) {
     bool found = false;
-    list<User *>::iterator it;
-    for (it = contacts.begin(); it != contacts.end(); it++) {
-        if ((*it)->getUsername() == usr->getUsername())
+    for(auto it : chats){
+        if(it == c)
             found = true;
     }
     return found;
 }
 
-bool User::addContact(User *usr) {
-    bool added = false;
-    if(!(this->findContact(usr))){
-        contacts.push_back(usr);
-        added = true;
-    }
-    return added;
-}
-
-bool User::removeContact(User *usr){
-    bool removed = false;
-    if (this->findContact(usr)){
-        contacts.remove(usr);
-        removed = true;
-    }
-    return removed;
-}
-
-bool User::findChat(User *usr) {
-    bool found = false;
-    for(auto it : user_register){
-        if(it.first == usr)
-            found = true;
-    }
-    return found;
-}
-
-Chat* User::returnChat(User *usr) {
-    for(auto it : user_register){
-        if(it.first == usr)
-            return it.second;
-    }
-    return nullptr;
-}
-
-void User::acceptChat(User* usr, Chat* c){
-    pair<User*, Chat*> pair(usr, c);
-    user_register.push_front(pair);
-    this->addContact(usr);
-}
-
-Chat* User::startChat(User *usr) {
-    Chat* c = nullptr;
-    if(findContact(usr)){
-        if(!findChat(usr)){
-            c = new Chat();
-            pair<User*, Chat*> pair(usr, c);
-            user_register.push_front(pair);
-            //the other user needs to accept the chat, in order to have a reference to the same object
-            usr->acceptChat(this, c);
-            this->sr->addChat(c);
-        }else{
-            c = returnChat(usr);
-        }
-        return c;
-    }else{
-        this->addContact(usr);
-        return c;
-    }
-}
-
-GroupChat* User::createGroup(){
-    GroupChat* c = new GroupChat();
-    c->addMember(this);
-}
-
-GroupChat* User::createGroup(list<User*> members){
-    GroupChat* c = new GroupChat();
-    for(auto it : members){
-        if(findContact(it)){
-            c = new GroupChat(members);
-            c->addMember(this);
-        }
-    }
-    return c;
-}
-
-void User::sendMessage(Chat *c, std::string content) {
+void User::sendMessage(Chat* c, string content){
     string complete_content = "";
     string meta_data = this->getUsername();
     complete_content = meta_data+": "+content;
     Message* msg = new Message(complete_content);
-    c->addMessage(msg);
-}
-
-void User::getRegister() {
-    std::cout<<"register of: "<<this->getUsername()<<std::endl;
-    for(auto it : user_register){
-        std::cout<<"user: "<<it.first->getUsername()<<std::endl;
-        std::cout<<"chat: "<<it.second->showMessages()<<std::endl;
-        std::cout<<"----"<<std::endl;
+    if(findChat(c)){
+        c->addMessage(msg);
+        msg->setSeen(true, this);
     }
 }
+
+void User::openChat(Chat *c) {
+    if(findChat(c)){
+        for(auto it : c->getMessages()){
+            std::cout<<it->getContent()<<std::endl;
+            if(it->isSeen().first && it->isSeen().second.size() < c->getMembers().size()){
+                it->setSeen(true, this);
+            }
+        }
+    }
+}
+
+
+
