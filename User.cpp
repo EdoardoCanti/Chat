@@ -15,16 +15,24 @@ string User::getUsername() { return username; }
 
 void User::setUsername(string username) { this->username = username; }
 
+SystemRegister* User::getSystemRegister() { return sr; }
+
+void User::setSystemRegister(SystemRegister* sr) { this->sr = sr; }
+
 void User::addChat(Chat *c) {
     chats.push_back(c);
 }
 
 bool User::findChat(Chat* c) {
     bool found = false;
+    if(std::find(this->chats.begin(), this->chats.end(), c) != this->chats.end())
+        found = true;
+   /*
     for(auto it : chats){
         if(it == c)
             found = true;
     }
+    */
     return found;
 }
 
@@ -48,6 +56,14 @@ void User::openChat(Chat *c) {
             }
         }
     }
+}
+
+int User::getChatsNumber() {
+    return chats.size();
+}
+
+list<Chat*> User::getChats() {
+    return chats;
 }
 
 

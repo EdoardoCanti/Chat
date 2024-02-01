@@ -34,12 +34,16 @@ public:
     // Getters and Setters
     string getUsername();
     void setUsername(string username);
+    SystemRegister* getSystemRegister();
+    void setSystemRegister(SystemRegister* sr);
 
     // Chat related methods
     void addChat(Chat* c);
     bool findChat(Chat *c);
     void sendMessage(Chat* c, string content);
     void openChat(Chat* c);
+    int getChatsNumber();
+    list<Chat*> getChats();
 
 };
 
