@@ -39,8 +39,8 @@ TEST(User, userChatsQuantityTest){
     SystemRegister* sr;
     sr = SystemRegister::getInstance();
     User* alice = new User("alice", sr);
-    Chat* c1 = new Chat();
-    Chat* c2 = new Chat();
+    shared_ptr<Chat> c1 = std::make_shared<Chat>();;
+    shared_ptr<Chat> c2 = std::make_shared<Chat>();;
     ASSERT_EQ(alice->getChatsNumber(),0);
     alice->addChat(c1);
     alice->addChat(c2);
@@ -52,10 +52,10 @@ TEST(User, userChatsQualityTest){
     SystemRegister* sr;
     sr = SystemRegister::getInstance();
     User* alice = new User("alice", sr);
-    Chat* c1 = new Chat();
-    Chat* c2 = new Chat();
+    shared_ptr<Chat> c1 = std::make_shared<Chat>();;
+    shared_ptr<Chat> c2 = std::make_shared<Chat>();;
     alice->addChat(c1);
-    list<Chat*> alices_chats = alice->getChats();
+    list<shared_ptr<Chat> > alices_chats = alice->getChats();
     ASSERT_TRUE(std::find(alices_chats.begin(), alices_chats.end(), c1) != alices_chats.end());
     ASSERT_TRUE(std::find(alices_chats.begin(), alices_chats.end(), c2) == alices_chats.end());
 }

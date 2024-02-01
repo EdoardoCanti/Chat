@@ -9,15 +9,15 @@
 
 // Testing C'tor
 TEST(Chat, chatStaticIdentifier){
-    Chat* c_0 = new Chat();
+    shared_ptr<Chat> c_0 = std::make_shared<Chat>();
     ASSERT_EQ(c_0->getId(),1);
 }
 
 // Testing the self-incremented identifier on each chat
 TEST(Chat, multipleChatsStaticIdentifier) {
-    Chat *c_0 = new Chat();
-    Chat *c_1 = new Chat();
-    Chat *c_2 = new Chat();
+    shared_ptr<Chat> c_0= std::make_shared<Chat>();
+    shared_ptr<Chat> c_1 = std::make_shared<Chat>();
+    shared_ptr<Chat> c_2 = std::make_shared<Chat>();
     ASSERT_EQ(c_0->getId(), 1);
     ASSERT_EQ(c_1->getId(), 2);
     ASSERT_EQ(c_2->getId(), 3);
@@ -29,7 +29,7 @@ TEST(Chat, messagesCounter){
     sr = SystemRegister::getInstance();
     User* usr_1 = new User("usr_1", sr);
     User* usr_2 = new User("usr_2", sr);
-    Chat* c = new Chat();
+    shared_ptr<Chat> c = std::make_shared<Chat>();
     sr->addChat(c);
     sr->addChatMember(c, usr_1);
     sr->addChatMember(c, usr_2);
@@ -50,7 +50,8 @@ TEST(Chat, seenUnseenCounter){
     User* usr_1 = new User("usr_1", sr);
     User* usr_2 = new User("usr_2", sr);
     User* usr_3 = new User("usr_3", sr);
-    Chat* c = new Chat();
+    //Chat* c = new Chat();
+    std::shared_ptr<Chat> c = std::make_shared<Chat>();
     sr->addChat(c);
     sr->addChatMember(c, usr_1);
     sr->addChatMember(c, usr_2);

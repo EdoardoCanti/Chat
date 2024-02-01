@@ -23,7 +23,7 @@ class User {
 
 private:
     string username;
-    list<Chat*> chats;
+    list<shared_ptr<Chat> > chats;
     SystemRegister* sr; //reference to global SystemRegister
 
 public:
@@ -38,12 +38,12 @@ public:
     void setSystemRegister(SystemRegister* sr);
 
     // Chat related methods
-    void addChat(Chat* c);
-    bool findChat(Chat *c);
-    void sendMessage(Chat* c, string content);
-    void openChat(Chat* c);
+    void addChat(shared_ptr<Chat> c);
+    bool findChat(shared_ptr<Chat> c);
+    void sendMessage(shared_ptr<Chat> c, string content);
+    void openChat(shared_ptr<Chat> c);
     int getChatsNumber();
-    list<Chat*> getChats();
+    list<shared_ptr<Chat> > getChats();
 
 };
 

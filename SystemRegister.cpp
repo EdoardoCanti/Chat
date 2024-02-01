@@ -14,7 +14,7 @@ SystemRegister* SystemRegister::getInstance() {
     return instance;
 }
 
-void SystemRegister::addChat(Chat *c) {
+void SystemRegister::addChat(shared_ptr<Chat> c) {
     this->chats_register.push_back(c);
 }
 
@@ -24,7 +24,7 @@ void SystemRegister::showChats(){
     }
 }
 
-void SystemRegister::addChatMember(Chat* c, User* usr){
+void SystemRegister::addChatMember(shared_ptr<Chat> c, User* usr){
     c->addMember(usr);
     usr->addChat(c);
 }
