@@ -6,22 +6,24 @@
 #define LAB_PROGRAMMAZIONE_MESSAGE_H
 
 #include <string>
+#include <list>
 using namespace std;
+class User;
 
 class Message {
 
 private:
     string content;
-    bool seen;
+    pair<bool, list<User*>> seen;
 
 public:
     Message(string content);
     Message();
     string getContent();
     void setContent(string content);
+    pair<bool, list<User*>> isSeen();
+    void setSeen(bool in_seen, User* usr);
 
-    bool isSeen() ;
-    void setSeen(bool seen);
 };
 
 
