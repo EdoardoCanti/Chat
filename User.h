@@ -23,10 +23,7 @@ class User {
 
 private:
     string username;
-    list<User*> contacts;
     list<Chat*> chats;
-    // List of pairs of type <User, Chat> in order to easily retrieve the chat with a specific user.
-    //list<pair<User*, Chat*> > user_register;
     SystemRegister* sr; //reference to global SystemRegister
 
 public:
@@ -37,10 +34,9 @@ public:
     // Getters and Setters
     string getUsername();
     void setUsername(string username);
-    list<User*> getContacts();
+
+    // Chat related methods
     void addChat(Chat* c);
-    list<Chat*> getChats();
-    string getContactList();
     bool findChat(Chat *c);
     void sendMessage(Chat* c, string content);
     void openChat(Chat* c);

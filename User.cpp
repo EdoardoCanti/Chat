@@ -8,29 +8,15 @@
 using namespace std;
 
 User::User(string username, SystemRegister* sr) : username(username), sr(sr){ }
+
 User::User() { }
 
 string User::getUsername() { return username; }
+
 void User::setUsername(string username) { this->username = username; }
 
 void User::addChat(Chat *c) {
     chats.push_back(c);
-}
-
-list<Chat*> User::getChats(){
-    return chats;
-}
-list<User*> User::getContacts(){
-    return contacts;
-}
-
-string User::getContactList() {
-    string contactsString = "";
-    list<User *>::iterator it;
-    for(it = contacts.begin(); it != contacts.end(); it++){
-        contactsString += (*it) -> getUsername() + "\n";
-    }
-    return contactsString;
 }
 
 bool User::findChat(Chat* c) {
