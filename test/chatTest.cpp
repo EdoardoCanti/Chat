@@ -84,3 +84,36 @@ TEST(Chat, seenUnseenCounter){
     ASSERT_EQ(unseen_messages, 1); // One seen by all three users
     ASSERT_EQ(seen_messages, 1); // One seen by only 2 users
 }
+
+TEST(Chat, showDifferentChats){
+    SystemRegister* sr;
+    sr = SystemRegister::getInstance();
+    User* usr_1 = new User("usr_1", sr);
+    User* usr_2 = new User("usr_2", sr);
+    User* usr_3 = new User("usr_3", sr);
+    User* usr_4 = new User("usr_4", sr);
+
+    std::shared_ptr<Chat> c1 = std::make_shared<Chat>();
+    sr->addChatMember(c1, usr_1);
+    sr->addChatMember(c1, usr_2);
+    sr->addChatMember(c1, usr_3);
+    sr->addChat(c1);
+
+    std::shared_ptr<Chat> c2 = std::make_shared<Chat>();
+    sr->addChatMember(c2, usr_2);
+    sr->addChatMember(c2, usr_4);
+    sr->addChat(c2);
+
+    usr_1->sendMessage(c1, "Hello World.");
+    usr_2->openChat(c1);
+    usr_2->sendMessage(c1, "Hi!");
+
+    usr_4->sendMessage(c2, "Hello from usr_4");
+    usr_2->openChat(c2);
+    usr_2->sendMessage(c2,":)");
+
+    sr->showChats();
+
+
+
+}
