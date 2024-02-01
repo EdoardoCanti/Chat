@@ -23,3 +23,8 @@ void SystemRegister::showChats(){
         std::cout<<it->getId();
     }
 }
+
+void SystemRegister::addChatMember(Chat* c, User* usr){
+    c->addMember(usr);
+    usr->addChat(c);
+}

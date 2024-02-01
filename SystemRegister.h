@@ -7,6 +7,7 @@
 
 #include "Chat.h"
 #include <iostream>
+#include "User.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ public:
     static SystemRegister* getInstance();
     void addChat(Chat* c);
     void showChats();
+    void addChatMember(Chat* c, User* usr);
 };
 
 
