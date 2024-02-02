@@ -12,16 +12,17 @@
 using namespace std;
 
 class SystemRegister {
-private:
-    SystemRegister();
-    static SystemRegister* instance;
-    list<shared_ptr<Chat> > chats_register;
 
-public:
-    static SystemRegister* getInstance();
-    void addChat(shared_ptr<Chat> c);
-    void showChats();
-    void addChatMember(shared_ptr<Chat>  c, User* usr);
+    private:
+        SystemRegister();
+        static SystemRegister* instance;
+        list<shared_ptr<Chat> > chats_register;
+
+    public:
+        static SystemRegister* getInstance();
+        void addChat(shared_ptr<Chat> c);
+        void showChats();
+        void addChatMember(shared_ptr<Chat>  c, User* usr);
 };
 
 

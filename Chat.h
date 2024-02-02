@@ -18,24 +18,24 @@ class User;
 
 class Chat {
 
-private:
-    static int global_id;
-    int id;
-    list<Message*> messages;
-    list<User*> members;
-    int messages_counter;
+    private:
+        static int global_id;
+        int id;
+        list<Message*> messages;
+        list<User*> members;
+        int messages_counter;
 
-public:
-    Chat();
-    void addMessage(Message* msg);
-    list<Message*> getMessages();
-    string showMessages();
-    int getMessagesCounter();
-    int getId();
-    void addMember(User* usr);
-    list<User*> getMembers();
-    int getUnseenCounter();
-    int getSeenCounter();
+    public:
+        Chat();
+        void addMessage(Message* msg);
+        list<Message*> getMessages();
+        string showMessages();
+        int getMessagesCounter();
+        int getId();
+        void addMember(User* usr);
+        list<User*> getMembers();
+        int getUnseenCounter();
+        int getSeenCounter();
 
 };
 

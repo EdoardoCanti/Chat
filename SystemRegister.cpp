@@ -23,9 +23,8 @@ void SystemRegister::showChats(){
         std::cout<<"--- Content of chat: "<<it->getId()<<"---"<<std::endl;
         auto members = it->getMembers();
         std::cout<<"members: "<<std::endl;
-        for(auto mem : members){
+        for(auto mem : members)
             std::cout<<"    > "<<mem->getUsername()<<std::endl;
-        }
         std::cout<<"messages info: Seen:"<<it->getSeenCounter()<<"/ Total: "<<it->getMessagesCounter()<<std::endl;
         auto messages = it->getMessages();
         for(auto msg : messages)

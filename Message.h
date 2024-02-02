@@ -12,17 +12,17 @@ class User;
 
 class Message {
 
-private:
-    string content;
-    pair<bool, list<User*> > seen;
+    private:
+        string content;
+        pair<bool, list<User*> > seen;
 
-public:
-    Message(string content);
-    Message();
-    string getContent();
-    void setContent(string content);
-    pair<bool, list<User*> > isSeen();
-    void setSeen(bool in_seen, User* usr);
+    public:
+        Message(string content);
+        Message();
+        string getContent();
+        void setContent(string content);
+        pair<bool, list<User*> > isSeen();
+        void setSeen(bool in_seen, User* usr);
 };
 
 
