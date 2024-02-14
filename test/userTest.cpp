@@ -49,7 +49,7 @@ TEST_F(UserTest, userChatsQualityTest){
     shared_ptr<Chat> c2 = std::make_shared<Chat>();
     alice->addChat(c1); // Add only chat c1 to alice's chats
     ASSERT_TRUE(alice->findChat(c1->getId()));
-    ASSERT_FALSE(alice->findChat(c2->getId()));
+    ASSERT_THROW(alice->findChat(c2->getId()), ChatNotFoundException);
 }
 
 // Throw Exception if trying to get a chat not added
