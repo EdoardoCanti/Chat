@@ -32,7 +32,7 @@ void SystemRegister::showChats(){
     }
 }
 
-void SystemRegister::addChatMember(shared_ptr<Chat> c, User* usr){
+void SystemRegister::addChatMember(shared_ptr<Chat> c, User *usr){
     c->addMember(usr);
     usr->addChat(c);
 }

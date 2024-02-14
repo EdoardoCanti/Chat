@@ -22,7 +22,7 @@ class SystemRegister {
         static SystemRegister* getInstance();
         void addChat(shared_ptr<Chat> c);
         void showChats();
-        void addChatMember(shared_ptr<Chat>  c, User* usr);
+        void addChatMember(shared_ptr<Chat>  c, User *usr);
 };
 
 
