@@ -10,7 +10,8 @@ set(SOURCE_FILES User.h
         Chat.h
         Chat.cpp
         SystemRegister.h
-        SystemRegister.cpp)
+        SystemRegister.cpp
+)
 
 add_executable(Lab_Programmazione main.cpp)
 add_library(core ${SOURCE_FILES})
