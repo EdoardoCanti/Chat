@@ -17,26 +17,24 @@ class User {
     private:
         string username;
         list<shared_ptr<Chat> > chats;
-        SystemRegister* sr; //reference to global SystemRegister
+        const SystemRegister& sr;
 
     public:
-        // C'tors
-        User(string username, SystemRegister* sr);
-        User();
+        // C'tor
+        User(const string& username, const SystemRegister& sr);
 
         // Getters and Setters
         string getUsername();
-        void setUsername(string username);
-        SystemRegister* getSystemRegister();
-        void setSystemRegister(SystemRegister* sr);
+        void setUsername(const string& username);
+        const SystemRegister& getSystemRegister();
 
         // Chat related methods
         void addChat(shared_ptr<Chat> c);
-        bool findChat(shared_ptr<Chat> c);
-        void sendMessage(shared_ptr<Chat> c, string content);
-        void openChat(shared_ptr<Chat> c);
+        bool findChat(int chatId);
+        void sendMessage(int chatId, const string& content);
+        void openChat(int chatId);
         int getChatsNumber();
-        list<shared_ptr<Chat> > getChats();
+        shared_ptr<Chat> getChat(int chatId);
 };
 
 
