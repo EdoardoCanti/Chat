@@ -7,56 +7,47 @@
 #include <algorithm>
 #include "../User.h"
 
+
+class UserTest : public ::testing::Test {
+    protected:
+        SystemRegister* sr;
+        User* alice;
+
+
+    virtual void SetUp() {
+        Chat::resetGlobalId();
+        sr = SystemRegister::getInstance();
+        alice = new User("alice", *sr);
+
+    }
+
+    virtual void TearDown() {
+        Chat::resetGlobalId();
+        delete alice;
+    }
+};
+
 // Username attribute getter test
-TEST(User, getUsernameTest){
-    SystemRegister* sr;
-    sr = SystemRegister::getInstance();
-    User* alice = new User("alice", sr);
+TEST_F(UserTest, getUsernameTest){
     ASSERT_EQ(alice->getUsername(), "alice");
 }
 
-// Default C'tor username attribute getter setter test
-TEST(User, setUsernameTest){
-    SystemRegister* sr;
-    sr = SystemRegister::getInstance();
-    User* alice = new User();
-    alice->setUsername("alice");
-    ASSERT_EQ(alice->getUsername(), "alice");
-}
-
-// Default C'tor SystemRegister attribute getter setter test
-TEST(User, setSystemRegisterTest){
-    SystemRegister* sr;
-    sr = SystemRegister::getInstance();
-    User* alice = new User();
-    alice->setUsername("alice");
-    alice->setSystemRegister(sr);
-    ASSERT_EQ(alice->getSystemRegister(), sr);
-}
-
-// number of chats in chats attribute test
-TEST(User, userChatsQuantityTest){
-    SystemRegister* sr;
-    sr = SystemRegister::getInstance();
-    User* alice = new User("alice", sr);
-    shared_ptr<Chat> c1 = std::make_shared<Chat>();;
-    shared_ptr<Chat> c2 = std::make_shared<Chat>();;
-    ASSERT_EQ(alice->getChatsNumber(),0);
+// Testing the number of chats in User::chats
+TEST_F(UserTest, userChatsQuantityTest){
+    shared_ptr<Chat> c1 = std::make_shared<Chat>();
+    shared_ptr<Chat> c2 = std::make_shared<Chat>();
+    ASSERT_EQ(alice->getChatsNumber(),0); // No chats added to alice's chats
     alice->addChat(c1);
     alice->addChat(c2);
-    ASSERT_EQ(alice->getChatsNumber(),2);
+    ASSERT_EQ(alice->getChatsNumber(),2); // Expected two chats added alice's chats
 }
 
-// which chats in chats attribute are collected
-TEST(User, userChatsQualityTest){
-    SystemRegister* sr;
-    sr = SystemRegister::getInstance();
-    User* alice = new User("alice", sr);
-    shared_ptr<Chat> c1 = std::make_shared<Chat>();;
-    shared_ptr<Chat> c2 = std::make_shared<Chat>();;
-    alice->addChat(c1);
-    list<shared_ptr<Chat> > alices_chats = alice->getChats();
-    ASSERT_TRUE(std::find(alices_chats.begin(), alices_chats.end(), c1) != alices_chats.end());
-    ASSERT_TRUE(std::find(alices_chats.begin(), alices_chats.end(), c2) == alices_chats.end());
+// Testing which chats are in User::chats
+TEST_F(UserTest, userChatsQualityTest){
+    shared_ptr<Chat> c1 = std::make_shared<Chat>();
+    shared_ptr<Chat> c2 = std::make_shared<Chat>();
+    alice->addChat(c1); // Add only chat c1 to alice's chats
+    ASSERT_TRUE(alice->findChat(c1->getId()));
+    ASSERT_FALSE(alice->findChat(c2->getId()));
 }
 
