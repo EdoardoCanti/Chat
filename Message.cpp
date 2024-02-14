@@ -6,13 +6,13 @@
 #include <iostream>
 #include <algorithm>
 
-Message::Message(std::string content) : content(content), seen(false,0){}
+Message::Message(const string& content) : content(content), seen(false,0){}
 
 Message::Message() {}
 
 string Message::getContent() {return content;}
 
-void Message::setContent(std::string content) {this->content = content;}
+void Message::setContent(const string& content) {this->content = content;}
 
 pair<bool, list<User*>> Message::isSeen() {
     return seen;
