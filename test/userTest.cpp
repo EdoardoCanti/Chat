@@ -6,6 +6,7 @@
 #include "../SystemRegister.h"
 #include <algorithm>
 #include "../User.h"
+#include "../ChatNotFoundException.h"
 
 
 class UserTest : public ::testing::Test {
@@ -49,5 +50,17 @@ TEST_F(UserTest, userChatsQualityTest){
     alice->addChat(c1); // Add only chat c1 to alice's chats
     ASSERT_TRUE(alice->findChat(c1->getId()));
     ASSERT_FALSE(alice->findChat(c2->getId()));
+}
+
+// Throw Exception if trying to get a chat not added
+TEST_F(UserTest, getNotAddedChat){
+    shared_ptr<Chat> c = std::make_shared<Chat>();
+    ASSERT_THROW(alice->getChat(0), ChatNotFoundException);
+}
+
+// Throw Exception if trying to send message to a chat not added
+TEST_F(UserTest, sendMessageToNotAddedChat){
+    shared_ptr<Chat> c = std::make_shared<Chat>();
+    ASSERT_THROW(alice->sendMessage(0, "Hello World!"), ChatNotFoundException);
 }
 

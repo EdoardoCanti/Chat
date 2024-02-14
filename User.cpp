@@ -25,6 +25,8 @@ bool User::findChat(int chatId) { // id univoco
     for(auto it : chats)
         if(it->getId() == chatId)
             found = true;
+    if(!found)
+        throw ChatNotFoundException();
     return found;
 }
 
@@ -50,6 +52,7 @@ void User::openChat(int chatId) {
             }
         }
     }
+
 }
 
 int User::getChatsNumber() {
@@ -58,12 +61,11 @@ int User::getChatsNumber() {
 
 shared_ptr<Chat> User::getChat(int chatId) {
     shared_ptr<Chat> chat = nullptr;
-    if (findChat(chatId)) {
+    if (findChat(chatId)){
         for (auto it: chats)
             if (it->getId() == chatId)
                 chat = it;
-    } else
-        throw ChatNotFoundException();
+    }
     return chat;
 }
 
