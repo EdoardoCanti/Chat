@@ -1,7 +1,5 @@
 //
 // Created by Edoardo Canti on 29/01/24.
-//
-
 #ifndef LAB_PROGRAMMAZIONE_MESSAGE_H
 #define LAB_PROGRAMMAZIONE_MESSAGE_H
 
@@ -12,17 +10,17 @@ class User;
 
 class Message {
 
-    private:
-        string content;
-        pair<bool, list<User* > > seen;
+private:
+    string content;
+    pair<bool, list<User* > > seen;
 
-    public:
-        Message(const string& content);
-        Message();
-        string getContent();
-        void setContent(const string& content);
-        pair<bool, list<User*> > isSeen();
-        void setSeen(bool in_seen, User* usr);
+public:
+    Message(const string& content);
+    Message();
+    string getContent();
+    void setContent(const string& content);
+    pair<bool, list<User*> > isSeen();
+    void setSeen(bool in_seen, User* usr);
 };
 
 
