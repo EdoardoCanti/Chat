@@ -7,6 +7,8 @@
 
 int Chat::global_id = 0; // static int set to 0
 
+void Chat::resetGlobalId() { global_id = 0;} // static method in order to reset global id for tests tearDown
+
 Chat::Chat() {
     global_id++;
     this->id = global_id;
@@ -14,7 +16,7 @@ Chat::Chat() {
 } // every new Chat has an incremented identifier
 
 
-void Chat::addMessage(Message *msg) {
+void Chat::addMessage(Message* msg) {
     messages.push_back(msg);
     messages_counter += 1;
 }

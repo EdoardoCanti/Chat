@@ -36,7 +36,7 @@ class Chat {
         list<User*> getMembers();
         int getUnseenCounter();
         int getSeenCounter();
-
+        static void resetGlobalId();
 };
 
 
