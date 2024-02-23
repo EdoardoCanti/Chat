@@ -29,13 +29,13 @@ class Chat {
         Chat();
         void addMessage(Message* msg);
         list<Message*> getMessages();
-        string showMessages();
-        int getMessagesCounter();
-        int getId();
+        const string showMessages(); // add const
+        const int getMessagesCounter(); // add const
+        const int getId();
         void addMember(User* usr);
         list<User*> getMembers();
-        int getUnseenCounter();
-        int getSeenCounter();
+        const int getUnseenCounter(); // add const
+        const int getSeenCounter(); // add const
         static void resetGlobalId();
 };
 

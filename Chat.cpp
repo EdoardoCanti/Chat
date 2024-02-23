@@ -25,7 +25,7 @@ list<Message*> Chat::getMessages(){
     return messages;
 }
 
-string Chat::showMessages() {
+const string Chat::showMessages() {
     string conversation = "";
     list<Message*>::iterator it;
     for(it = messages.begin(); it != messages.end(); it++)
@@ -33,11 +33,11 @@ string Chat::showMessages() {
     return conversation;
 }
 
-int Chat::getMessagesCounter() {
+const int Chat::getMessagesCounter() {
     return messages_counter;
 }
 
-int Chat::getId(){
+const int Chat::getId(){
     return id;
 }
 
@@ -49,7 +49,7 @@ list<User*> Chat::getMembers(){
     return members;
 }
 
-int Chat::getSeenCounter() {
+const int Chat::getSeenCounter() {
     int seen_counter = 0;
     for (auto it: messages) {
         if (it->isSeen().first && it->isSeen().second.size() == getMembers().size())
@@ -58,7 +58,7 @@ int Chat::getSeenCounter() {
     return seen_counter;
 }
 
-int Chat::getUnseenCounter(){
+const int Chat::getUnseenCounter(){
     int seen_counter = getSeenCounter();
     return getMessagesCounter() - seen_counter;
 }
