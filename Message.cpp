@@ -8,8 +8,6 @@
 
 Message::Message(const string& content) : content(content), seen(false,0){}
 
-Message::Message() {}
-
 const string Message::getContent() {return content;}
 
 void Message::setContent(const string& content) {this->content = content;}

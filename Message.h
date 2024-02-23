@@ -15,8 +15,7 @@ private:
     pair<bool, list<User* > > seen;
 
 public:
-    Message(const string& content);
-    Message();
+    explicit Message(const string& content); //added explicit in order to disallow implicit coversion on string type param
     const string getContent(); //add const
     void setContent(const string& content);
     const pair<bool, list<User*> > isSeen(); //add const
