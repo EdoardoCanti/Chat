@@ -10,7 +10,7 @@ using namespace std;
 
 User::User(const string& username, const SystemRegister& sr) : username(username), sr(sr) {}
 
-string User::getUsername() { return username; }
+const string User::getUsername() { return username; }
 
 void User::setUsername(const string& username) { this->username = username; }
 
@@ -55,11 +55,11 @@ void User::openChat(int chatId) {
 
 }
 
-int User::getChatsNumber() {
+const int User::getChatsNumber() {
     return chats.size();
 }
 
-shared_ptr<Chat> User::getChat(int chatId) {
+const shared_ptr<Chat> User::getChat(int chatId) {
     shared_ptr<Chat> chat = nullptr;
     if (findChat(chatId)){
         for (auto it: chats)

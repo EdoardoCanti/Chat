@@ -24,7 +24,7 @@ class User {
         User(const string& username, const SystemRegister& sr);
 
         // Getters and Setters
-        string getUsername();
+        const string getUsername(); // add const
         void setUsername(const string& username);
         const SystemRegister& getSystemRegister();
 
@@ -33,8 +33,8 @@ class User {
         bool findChat(int chatId);
         void sendMessage(int chatId, const string& content);
         void openChat(int chatId);
-        int getChatsNumber();
-        shared_ptr<Chat> getChat(int chatId);
+        const int getChatsNumber(); // add const
+        const shared_ptr<Chat> getChat(int chatId); // add const
 };
 
 
