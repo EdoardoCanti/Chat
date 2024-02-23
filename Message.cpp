@@ -10,11 +10,11 @@ Message::Message(const string& content) : content(content), seen(false,0){}
 
 Message::Message() {}
 
-string Message::getContent() {return content;}
+const string Message::getContent() {return content;}
 
 void Message::setContent(const string& content) {this->content = content;}
 
-pair<bool, list<User*>> Message::isSeen() {
+const pair<bool, list<User*>> Message::isSeen() {
     return seen;
 }
 

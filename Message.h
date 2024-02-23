@@ -17,9 +17,9 @@ private:
 public:
     Message(const string& content);
     Message();
-    string getContent();
+    const string getContent(); //add const
     void setContent(const string& content);
-    pair<bool, list<User*> > isSeen();
+    const pair<bool, list<User*> > isSeen(); //add const
     void setSeen(bool in_seen, User* usr);
 };
 
