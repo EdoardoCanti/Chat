@@ -24,17 +24,17 @@ class User {
         User(const string& username, const SystemRegister& sr);
 
         // Getters and Setters
-        const string getUsername(); // add const
+        const string& getUsername() const; // changed to const member function
         void setUsername(const string& username);
-        const SystemRegister& getSystemRegister();
+        const SystemRegister& getSystemRegister() const; // changed to const member function
 
         // Chat related methods
         void addChat(shared_ptr<Chat> c);
-        bool findChat(int chatId);
+        bool findChat(int chatId) const; // changed to const member function
         void sendMessage(int chatId, const string& content);
         void openChat(int chatId);
-        const int getChatsNumber(); // add const
-        const shared_ptr<Chat> getChat(int chatId); // add const
+        int getChatsNumber() const; // changed to const member function
+        shared_ptr<Chat> getChat(int chatId) const; // changed to const member function
 };
 
 

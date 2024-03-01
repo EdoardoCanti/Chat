@@ -18,7 +18,8 @@ void SystemRegister::addChat(shared_ptr<Chat> c) {
     this->chats_register.push_back(c);
 }
 
-void SystemRegister::showChats(){
+// const member function since doesn't change the object status
+void SystemRegister::showChats() const{
     for(auto it : chats_register){
         std::cout<<"--- Content of chat: "<<it->getId()<<"---"<<std::endl;
         auto members = it->getMembers();
@@ -35,4 +36,13 @@ void SystemRegister::showChats(){
 void SystemRegister::addChatMember(shared_ptr<Chat> c, User *usr){
     c->addMember(usr);
     usr->addChat(c);
+}
+
+// const member function since doesn't change the object status
+int SystemRegister::getChatsNumber() const{
+    return chats_register.size();
+};
+
+void SystemRegister::clear() {
+    this->chats_register.clear();
 }

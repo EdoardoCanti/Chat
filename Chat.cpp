@@ -21,23 +21,26 @@ void Chat::addMessage(Message* msg) {
     messages_counter += 1;
 }
 
-list<Message*> Chat::getMessages(){
+// const member function since does not changes the object status
+list<Message*> Chat::getMessages() const{
     return messages;
 }
 
-const string Chat::showMessages() {
+// const member function since does not changes the object status
+string Chat::showMessages() const{
     string conversation = "";
-    list<Message*>::iterator it;
-    for(it = messages.begin(); it != messages.end(); it++)
+    for(auto it = messages.begin(); it != messages.end(); it++)
         conversation += (*it)->getContent() + "\n";
     return conversation;
 }
 
-const int Chat::getMessagesCounter() {
+// const member function since does not changes the object status
+int Chat::getMessagesCounter() const{
     return messages_counter;
 }
 
-const int Chat::getId(){
+// const member function since does not changes the object status
+const int Chat::getId() const{
     return id;
 }
 
@@ -45,11 +48,19 @@ void Chat::addMember(User* usr){
     members.push_back(usr);
 }
 
-list<User*> Chat::getMembers(){
+// const member function since does not changes the object status
+list<User*> Chat::getMembers() const{
     return members;
 }
 
-const int Chat::getSeenCounter() {
+// const member function since does not changes the object status
+int Chat::getUnseenCounter() const{
+    int seen_counter = getSeenCounter();
+    return getMessagesCounter() - seen_counter;
+}
+
+// const member function since does not changes the object status
+int Chat::getSeenCounter() const{
     int seen_counter = 0;
     for (auto it: messages) {
         if (it->isSeen().first && it->isSeen().second.size() == getMembers().size())
@@ -58,8 +69,5 @@ const int Chat::getSeenCounter() {
     return seen_counter;
 }
 
-const int Chat::getUnseenCounter(){
-    int seen_counter = getSeenCounter();
-    return getMessagesCounter() - seen_counter;
-}
+
 

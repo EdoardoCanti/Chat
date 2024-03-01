@@ -16,9 +16,9 @@ private:
 
 public:
     explicit Message(const string& content); //added explicit in order to disallow implicit coversion on string type param
-    const string getContent(); //add const
+    const string& getContent() const; // const member function
     void setContent(const string& content);
-    const pair<bool, list<User*> > isSeen(); //add const
+    pair<bool, list<User*> > isSeen() const; // const member function
     void setSeen(bool in_seen, User* usr);
 };
 

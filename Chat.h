@@ -28,14 +28,14 @@ class Chat {
     public:
         Chat();
         void addMessage(Message* msg);
-        list<Message*> getMessages();
-        const string showMessages(); // add const
-        const int getMessagesCounter(); // add const
-        const int getId();
+        list<Message*> getMessages() const; // const member function
+        string showMessages() const ; // const member function
+        int getMessagesCounter() const; // const member function
+        const int getId() const;
         void addMember(User* usr);
-        list<User*> getMembers();
-        const int getUnseenCounter(); // add const
-        const int getSeenCounter(); // add const
+        list<User*> getMembers() const; // const member function
+        int getUnseenCounter() const ; // const member function
+        int getSeenCounter() const ; // const member function
         static void resetGlobalId();
 };
 

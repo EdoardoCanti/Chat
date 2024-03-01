@@ -8,11 +8,14 @@
 
 Message::Message(const string& content) : content(content), seen(false,0){}
 
-const string Message::getContent() {return content;}
+
+// const member function because doesn't change object status
+const string& Message::getContent() const {return content;}
 
 void Message::setContent(const string& content) {this->content = content;}
 
-const pair<bool, list<User*>> Message::isSeen() {
+// const member function because doesn't change object status
+pair<bool, list<User*>> Message::isSeen() const {
     return seen;
 }
 

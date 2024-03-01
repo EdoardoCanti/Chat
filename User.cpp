@@ -10,17 +10,21 @@ using namespace std;
 
 User::User(const string& username, const SystemRegister& sr) : username(username), sr(sr) {}
 
-const string User::getUsername() { return username; }
+// const member function because does not change the object status.
+// since username is constant also return const string ref
+const string& User::getUsername() const { return username; }
+
 
 void User::setUsername(const string& username) { this->username = username; }
 
-const SystemRegister& User::getSystemRegister() { return sr; }
+// const member function because does not change the object status.
+const SystemRegister& User::getSystemRegister() const { return sr; }
 
 void User::addChat(shared_ptr<Chat> c) {
     chats.push_back(c);
 }
 
-bool User::findChat(int chatId) { // id univoco
+bool User::findChat(int chatId) const{ // id univoco
     bool found = false;
     for(auto it : chats)
         if(it->getId() == chatId)
@@ -52,14 +56,15 @@ void User::openChat(int chatId) {
             }
         }
     }
-
 }
 
-const int User::getChatsNumber() {
+// const member function since doesn't change the object status
+int User::getChatsNumber() const{
     return chats.size();
 }
 
-const shared_ptr<Chat> User::getChat(int chatId) {
+// const member function since doesn't change the object status
+shared_ptr<Chat> User::getChat(int chatId) const {
     shared_ptr<Chat> chat = nullptr;
     if (findChat(chatId)){
         for (auto it: chats)
