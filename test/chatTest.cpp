@@ -29,6 +29,8 @@ protected:
         delete usr_1;
         delete usr_2;
         delete usr_3;
+        delete usr_4;
+        sr->clear();
     }
 };
 
@@ -36,6 +38,7 @@ protected:
 TEST_F(ChatTest, chatStaticIdentifier){
     shared_ptr<Chat> c = std::make_shared<Chat>();
     ASSERT_EQ(c->getId(),1);
+    c.reset();
 }
 
 // Testing the self-incremented identifier on each chat
@@ -46,6 +49,9 @@ TEST_F(ChatTest, multipleChatsStaticIdentifier) {
     ASSERT_EQ(c0->getId(), 1);
     ASSERT_EQ(c1->getId(), 2);
     ASSERT_EQ(c2->getId(), 3);
+    c0.reset();
+    c1.reset();
+    c2.reset();
 }
 
 // Testing the number of messages in chat
@@ -61,6 +67,7 @@ TEST_F(ChatTest, messagesCounter){
     usr_2->sendMessage(chat_id, "Hi.");
     messages_in_chat = c->getMessagesCounter(); // Expected only one message in chat
     ASSERT_EQ(messages_in_chat, 2);
+    c.reset();
 }
 
 // Testing the number of seen and unseen messages in chat
@@ -71,7 +78,7 @@ TEST_F(ChatTest, messagesCounter){
  * In order to visualize a message a User must apply User::openChat(chat_id), that will print all messages in the chat.
  * After a user ran User::openChat his name will be added into Message::seen second attribute, which is a pair composed of a
  * boolean and a list of users
- */
+*/
 TEST_F(ChatTest, seenUnseenCounter){
     shared_ptr<Chat> c = std::make_shared<Chat>();
     sr->addChat(c);
@@ -105,6 +112,7 @@ TEST_F(ChatTest, seenUnseenCounter){
     ASSERT_EQ(messagges_in_chat, 2); // Two messages in total
     ASSERT_EQ(unseen_messages, 1); // One seen by all three users
     ASSERT_EQ(seen_messages, 1); // One seen by only 2 users
+    c.reset();
 }
 
 TEST_F(ChatTest, getUnexistingChat){
@@ -112,28 +120,46 @@ TEST_F(ChatTest, getUnexistingChat){
     shared_ptr<Chat> c1 = std::make_shared<Chat>();
     sr->addChatMember(c0, usr_1);
     ASSERT_THROW(usr_1->getChat(2), ChatNotFoundException);
+    c0.reset();
+    c1.reset();
 }
 
 TEST_F(ChatTest, showDifferentChats){
+    std::cout<<"E' questo!--------"<<std::endl;
+    //C1
     shared_ptr<Chat> c1 = std::make_shared<Chat>();
     sr->addChatMember(c1, usr_1);
     sr->addChatMember(c1, usr_2);
     sr->addChatMember(c1, usr_3);
     sr->addChat(c1);
 
-    std::shared_ptr<Chat> c2 = std::make_shared<Chat>();
-    sr->addChatMember(c2, usr_2);
-    sr->addChatMember(c2, usr_4);
-    sr->addChat(c2);
-
     auto chat1_id = c1->getId();
-    auto chat2_id = c2->getId();
-    usr_1->sendMessage(chat1_id, "Hello World.");
-    usr_2->openChat(chat1_id);
+    usr_1->sendMessage(chat1_id, "Hello World."); //1 in chat, 0 seen
+    usr_2->openChat(chat1_id); //seen 1
     usr_2->sendMessage(chat1_id, "Hi!");
+    std::cout<<"FINE INTERAZIONE C1"<<std::endl;
 
+    std::shared_ptr<Chat> c2 = std::make_shared<Chat>();
+    sr->addChatMember(c2 , usr_2);
+    sr->addChatMember(c2 , usr_4);
+    sr->addChat(c2 );
+
+    auto chat2_id = c2 ->getId();
     usr_4->sendMessage(chat2_id, "Hello from usr_4");
     usr_2->openChat(chat2_id);
     usr_2->sendMessage(chat2_id,":)");
     sr->showChats();
+}
+
+TEST_F(ChatTest, createAndDestroy){
+    ASSERT_EQ(sr->getChatsNumber(), 0);
+    shared_ptr<Chat> chat = std::make_shared<Chat>();
+    sr->addChatMember(chat, usr_1);
+    sr->addChatMember(chat, usr_2);
+    sr->addChat(chat);
+
+    shared_ptr<Chat> chatNuova = std::make_shared<Chat>();
+    sr->addChat(chatNuova);
+    chatNuova->addMember(usr_2);
+    ASSERT_EQ(chat->getId(), 1);
 }
